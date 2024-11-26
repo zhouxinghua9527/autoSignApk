@@ -35,20 +35,26 @@ public class SignConfigFile implements Serializable {
     }
 
     /**
-     * signToolsPath : D:\Android\SDKuild-tools\33.0.2\apksigner.bat
+     * signToolsPath : D:\Android\SDK\build-tools\33.0.2\apksigner.bat
+     * zipalignToolsPath : D:\Android\SDK\build-tools\33.0.2\zipalign.exe
      * signConfigs : [{"appId":"com.wznews.news.app","path":"E:\\Desktop\\apk\\keysotres\\wzrb.jks","storePassword":"monsoon","keyAlias":"myandroidkey","aliasPassword":"monsoon"}]
      */
 
     private String signToolsPath;
+    private String zipalignToolsPath;
     private List<SignConfigsBean> signConfigs;
 
     private String getSignToolsPath() {
         return signToolsPath;
     }
 
+    public String getZipalignToolsPath() {
+        return zipalignToolsPath;
+    }
 
-
-
+    public void setZipalignToolsPath(String zipalignToolsPath) {
+        this.zipalignToolsPath = zipalignToolsPath;
+    }
 
     public SignConfigsBean getConfigBeanByPackageName(String packageName) {
         if(packageName==null||packageName.isEmpty()){
@@ -60,6 +66,7 @@ public class SignConfigFile implements Serializable {
         for(SignConfigsBean bean:signConfigs){
             if(packageName.equals(bean.getAppId())){
                 bean.setSignToolsPath(getSignToolsPath());
+                bean.setZipalignToolsPath(getZipalignToolsPath());
                 return bean;
             }
         }
